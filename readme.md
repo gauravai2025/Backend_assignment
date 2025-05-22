@@ -4,23 +4,6 @@
 
 A RESTful Task Management API built with Node.js, Express, and MongoDB featuring user and task management with JWT-based authentication.
 
----
-
-## API Test Endpoints (Screenshots)
-
-| Endpoint | Functionality | Screenshot |
-|----------|--------------|------------|
-| `/users/register` | User registration | ![User Registration](user_register.png) |
-| `/users/login` | User login (JWT generation) | ![User Login](user_login.png) |
-| `/users/:id` | Get user details | ![User Details](user_details.png) |
-| `/users` | Get all users | ![All Users](getAllUsers.png) |
-| `/tasks` | Create new task | ![Add Task](addTask.png) |
-| `/tasks/:id` | Get task by ID | ![Get Task](getTaskById.png) |
-| `/tasks` | Get all tasks | ![All Tasks](getAllTasks.png) |
-| `/tasks/:id` | Update task | ![Update Task](updateTaskById.png) |
-| `/tasks/:id` | Delete task | ![Delete Task](deleteTaskById.png) |
-| `/auth/refresh` | Refresh access token | ![Refresh Token](refresh_accessToken.png) |
-| `/auth/current` | Get current user | ![Current User](access_currentUserp.png) |
 
 ---
 
@@ -30,7 +13,6 @@ A RESTful Task Management API built with Node.js, Express, and MongoDB featuring
 
 A RESTful Task Management API built with Node.js, Express, and MongoDB featuring user and task management with JWT-based authentication.
 
->>>>>>> 1e349e79a1b5a284ed158c36290127bad48d79b5
 ## Table of Contents
 
 - [Project Overview](#project-overview)  
@@ -155,6 +137,21 @@ Content-Type: application/json
 | DELETE | `/tasks/:id`   | Delete task                                                                                      | N/A                                                                                                                                  | Yes (JWT)      |
 
 ---
+## API Test Endpoints (Screenshots)
+
+| Endpoint | Functionality | Screenshot |
+|----------|--------------|------------|
+| `/users/register` | User registration | ![User Registration](user_register.png) |
+| `/users/login` | User login (JWT generation) | ![User Login](user_login.png) |
+| `/users/:id` | Get user details | ![User Details](user_details.png) |
+| `/users` | Get all users | ![All Users](getAllUsers.png) |
+| `/tasks` | Create new task | ![Add Task](addTask.png) |
+| `/tasks/:id` | Get task by ID | ![Get Task](getTaskById.png) |
+| `/tasks` | Get all tasks | ![All Tasks](getAllTasks.png) |
+| `/tasks/:id` | Update task | ![Update Task](updateTaskById.png) |
+| `/tasks/:id` | Delete task | ![Delete Task](deleteTaskById.png) |
+| `/auth/refresh` | Refresh access token | ![Refresh Token](refresh_accessToken.png) |
+| `/auth/current` | Get current user | ![Current User](access_currentUserp.png) |
 
 ## Error Handling
 
