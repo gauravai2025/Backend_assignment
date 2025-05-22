@@ -1,5 +1,6 @@
 Here's an improved version of your README.md with the API test endpoints and their functions displayed prominently at the top, along with other enhancements:
 
+<<<<<<< HEAD
 ```markdown
 # Taskify
 
@@ -25,6 +26,13 @@ A RESTful Task Management API built with Node.js, Express, and MongoDB featuring
 
 ---
 
+=======
+````markdown
+# Backend_assignment
+
+A RESTful Task Management API built with Node.js, Express, and MongoDB featuring user and task management with JWT-based authentication.
+
+>>>>>>> 1e349e79a1b5a284ed158c36290127bad48d79b5
 ## Table of Contents
 
 - [Project Overview](#project-overview)  
@@ -38,11 +46,9 @@ A RESTful Task Management API built with Node.js, Express, and MongoDB featuring
 - [Version Control](#version-control)  
 - [Bonus Features](#bonus-features)  
 
----
-
 ## Project Overview
 
-Taskify is a simple yet robust backend API that allows you to manage users and tasks similar to basic features of Trello or Todoist. It supports JWT authentication for secure access.
+It is a simple yet robust backend API that allows you to manage users and tasks similar to basic features of Trello or Todoist. It supports JWT authentication for secure access.
 
 ## Setup Instructions
 
@@ -176,6 +182,7 @@ Common error responses:
 
 ## Version Control
 
+<<<<<<< HEAD
 ```bash
 # Commit example
 git commit -m "feat: add JWT authentication middleware"
@@ -188,6 +195,12 @@ git commit -m "fix: correct task status validation"
   - Feature branches: `feature/auth`, `feature/tasks`, etc.
 
 Repository: [Backend Assignment](https://github.com/gauravai2025/Backend_assignment)
+=======
+* The project uses Git for version control.
+* Commits follow meaningful, clear messages.
+* Branching strategy includes `main` for production, and feature branches for new features or bug fixes.
+
+>>>>>>> 1e349e79a1b5a284ed158c36290127bad48d79b5
 
 ---
 
