@@ -141,7 +141,7 @@ Content-Type: application/json
 
 | Endpoint | Functionality | Screenshot |
 |----------|--------------|------------|
-| `/users/register` | User registration | ![User Registration](user_register.png) |
+| `/users/register` | User registration | ![User Registration](screenshots/user_register.png) |
 | `/users/login` | User login (JWT generation) | ![User Login](user_login.png) |
 | `/users/:id` | Get user details | ![User Details](user_details.png) |
 | `/users` | Get all users | ![All Users](getAllUsers.png) |
