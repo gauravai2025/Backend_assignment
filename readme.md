@@ -1,10 +1,8 @@
 
 ````markdown
-# Taskify
+# Backend_assignment
 
 A RESTful Task Management API built with Node.js, Express, and MongoDB featuring user and task management with JWT-based authentication.
-
----
 
 ## Table of Contents
 
@@ -19,11 +17,9 @@ A RESTful Task Management API built with Node.js, Express, and MongoDB featuring
 - [Version Control](#version-control)  
 - [Bonus Features](#bonus-features)  
 
----
-
 ## Project Overview
 
-Taskify is a simple yet robust backend API that allows you to manage users and tasks similar to basic features of Trello or Todoist. It supports JWT authentication for secure access.
+It is a simple yet robust backend API that allows you to manage users and tasks similar to basic features of Trello or Todoist. It supports JWT authentication for secure access.
 
 ## Setup Instructions
 
@@ -193,7 +189,7 @@ Content-Type: application/json
 * The project uses Git for version control.
 * Commits follow meaningful, clear messages.
 * Branching strategy includes `main` for production, and feature branches for new features or bug fixes.
-* GitHub (or GitLab/Bitbucket) repo link: [https://github.com/your-username/taskify](https://github.com/your-username/taskify)
+
 
 ---
 
