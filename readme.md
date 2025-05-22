@@ -9,12 +9,12 @@ A RESTful Task Management API built with Node.js, Express, and MongoDB featuring
 - [Setup Instructions](#setup-instructions)  
 - [Environment Variables](#environment-variables)  
 - [API Documentation](#api-documentation)  
-  - [Authentication](#authentication)  
-  - [User Endpoints](#user-endpoints)  
-  - [Task Endpoints](#task-endpoints)  
+  - [User API Endpoints](#user-api-endpoints)  
+  - [Task API Endpoints](#task-api-endpoints)  
 - [Error Handling](#error-handling)  
 - [Version Control](#version-control)  
-- [Bonus Features](#bonus-features)  
+- [Bonus Features](#bonus-features)
+
 
 ## Project Overview
 
@@ -22,11 +22,24 @@ It is a simple yet robust backend API that allows you to manage users and tasks 
 
 ## Setup Instructions
 
-### Prerequisites
+### Key Dependencies
 
-- [Node.js](https://nodejs.org/) v14 or higher  
-- [MongoDB](https://www.mongodb.com/) (local or cloud instance)    
-- npm or yarn  
+This project uses the following main Node.js packages:
+
+- **express** – Web framework
+- **mongoose** – MongoDB ODM
+- **jsonwebtoken** – JWT-based authentication
+- **bcrypt** – Password hashing
+- **dotenv** – Environment variable management
+- **cookie-parser** – Cookie support
+- **cors** – Enable cross-origin requests
+- **nodemon** (dev) – Auto-restart server during development
+
+To install all dependencies, simply run:
+```
+npm install package-name
+```
+
 
 ### Installation
 
@@ -49,10 +62,14 @@ In the project root, create a `.env` file with:
 
 ```env
 PORT=8000
-MONGODB_URI=mongodb://<username>:<password>@host:port/database
+
+# Replace <username>, <password>, <cluster-url>, and <database> as needed
+MONGODB_URI=mongodb+srv://<username>:<password>@<cluster-url>/<database>?retryWrites=true&w=majority
+
 JWT_SECRET=your_jwt_secret_key
 ACCESS_TOKEN_EXPIRY=15m
 REFRESH_TOKEN_EXPIRY=7d
+
 ```
 
 4. **Run the server**
@@ -79,69 +96,49 @@ Server will run at `http://localhost:8000`
 
 ## API Documentation
 
-### Authentication
+### User API Endpoints
 
-* **Login (generate JWT token)**
-```bash
-POST /auth/login
-Content-Type: application/json
+| Method | Endpoint               | Description                  | Request Body                                                                                     | Authentication |
+|--------|------------------------|------------------------------|---------------------------------------------------------------------------------------------------|----------------|
+| POST   | `/api/users/register`  | Register new user            | `{ "name": "gaurav kumar", "email": "gaurav170820@gmail.com", "password": "pass123" }`           | No             |
+| POST   | `/api/users/login`     | Login user (get tokens)      | `{ "email": "gaurav170820@gmail.com", "password": "pass123" }`                                   | No             |
+| POST   | `/api/users/logout`    | Logout user                  | Not required                                                                                      | No             |
+| POST   | `/api/users/refresh`   | Refresh access token         | Not required (uses refresh token from cookies)                                                    | Yes (JWT)      |
+| GET    | `/api/users/users/:id` | Get user details             | Not required                                                                                      | Yes (JWT)      |
+| GET    | `/api/users/users`     | List all users               | Not required                                                                                      | Yes (JWT)      |
+| GET    | `/api/users/me`        | Get current user profile     | Not required                                                                                      | Yes (JWT)      |
 
-{
-  "email": "user@example.com",
-  "password": "yourpassword"
-}
-```
 
-* **Refresh Access Token**
-```bash
-POST /auth/refresh
-Content-Type: application/json
+### Task API Endpoints
 
-{
-  "refreshToken": "your_refresh_token"
-}
-```
 
----
+| Method | Endpoint            | Description                                                                                     | Request Body                                                                                                                      |
+|--------|---------------------|-------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------|
+| POST   | `/api/tasks`        | Create new task                                                                                 | `{ "title": "Task 1", "description": "Details", "dueDate": "2025-06-01", "status": "pending", "assignedTo": "userId" }`          |
+| GET    | `/api/tasks/:id`    | Get task details                                                                                | N/A                                                                                                                               |
+| GET    | `/api/tasks`        | List tasks (e.g., `?status=pending&assignedTo=userId&page=1&limit=10`)                          | N/A                                                                                                                               |
+| PUT    | `/api/tasks/:id`    | Update task                                                                                     | `{ "title": "Updated", "status": "completed" }`                                                                                   |
+| DELETE | `/api/tasks/:id`    | Delete task                                                                                     | N/A                                                                                                                               |
 
-### User Endpoints
-
-| Method | Endpoint       | Description                     | Request Body                                          | Authentication |
-|--------|----------------|---------------------------------|------------------------------------------------------|----------------|
-| POST   | `/users`       | Register new user               | `{ "name": "John", "email": "john@example.com", "password": "secure123" }` | No             |
-| POST   | `/auth/login`  | Login user (get tokens)         | `{ "email": "john@example.com", "password": "secure123" }` | No             |
-| GET    | `/users/:id`   | Get user details                | N/A                                                   | Yes (JWT)      |
-| GET    | `/users`       | List all users                  | N/A                                                   | Yes (Admin)    |
-| GET    | `/auth/current`| Get current user profile        | N/A                                                   | Yes (JWT)      |
-
----
-
-### Task Endpoints
-
-| Method | Endpoint       | Description                                                                                       | Request Body                                                                                                                          | Authentication |
-|--------|----------------|--------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------|----------------|
-| POST   | `/tasks`       | Create new task                                                                                  | `{ "title": "Task 1", "description": "Details", "dueDate": "2025-06-01", "status": "pending", "assignedTo": "userId" }`               | Yes (JWT)      |
-| GET    | `/tasks/:id`   | Get task details                                                                                 | N/A                                                                                                                                  | Yes (JWT)      |
-| GET    | `/tasks`       | List tasks (filter by: `?status=pending&assignedTo=userId&page=1&limit=10`)                      | N/A                                                                                                                                  | Yes (JWT)      |
-| PUT    | `/tasks/:id`   | Update task                                                                                      | `{ "title": "Updated", "status": "completed" }`                                                                                      | Yes (JWT)      |
-| DELETE | `/tasks/:id`   | Delete task                                                                                      | N/A                                                                                                                                  | Yes (JWT)      |
 
 ---
 ## API Test Endpoints (Screenshots)
+| Method | Endpoint              | Description              | Screenshot |
+|--------|-----------------------|--------------------------|------------|
+| POST   | `/api/users/register` | User registration        | <img src="screenshots/user_register.png" alt="User Registration" width="300"/> |
+| POST   | `/api/users/login`    | User login (JWT)         | <img src="screenshots/user_login.png" alt="User Login" width="300"/> |
+| GET    | `/api/users/me`       | Get current user profile | <img src="screenshots/access_currentUser.png" alt="Current User" width="300"/> |
+| GET    | `/api/users/users/:id`| Get user details         | <img src="screenshots/user_details.png" alt="User Details" width="300"/> |
+| POST   | `/api/users/refresh`  | Refresh access token     | <img src="screenshots/refresh_accessToken.png" alt="Refresh Token" width="300"/> |
+| GET    | `/api/users/users`    | Get all users            | <img src="screenshots/getAllUsers.png" alt="All Users" width="300"/> |
+| POST   | `/api/tasks`          | Create new task          | <img src="screenshots/addTask.png" alt="Add Task" width="300"/> |
+| GET    | `/api/tasks/:id`      | Get task by ID           | <img src="screenshots/getTaskById.png" alt="Get Task" width="300"/> |
+| GET    | `/api/tasks`          | Get all tasks            | <img src="screenshots/getAllTasks.png" alt="All Tasks" width="300"/> |
+| PUT    | `/api/tasks/:id`      | Update task              | <img src="screenshots/updateTaskById.png" alt="Update Task" width="300"/> |
+| DELETE | `/api/tasks/:id`      | Delete task              | <img src="screenshots/deleteTaskById.png" alt="Delete Task" width="300"/> |
 
-| Endpoint | Description | Screenshot |
-|----------|-------------|------------|
-| `/users/register` | User registration | <img src="screenshots/user_register.png" alt="User Registration" width="300"/> |
-| `/users/login` | User login (JWT generation) | <img src="screenshots/user_login.png" alt="User Login" width="300"/> |
-| `/users/:id` | Get user details | <img src="screenshots/user_details.png" alt="User Details" width="300"/> |
-| `/users` | Get all users | <img src="screenshots/getAllUsers.png" alt="All Users" width="300"/> |
-| `/tasks` | Create new task | <img src="screenshots/addTask.png" alt="Add Task" width="300"/> |
-| `/tasks/:id` | Get task by ID | <img src="screenshots/getTaskById.png" alt="Get Task" width="300"/> |
-| `/tasks` | Get all tasks | <img src="screenshots/getAllTasks.png" alt="All Tasks" width="300"/> |
-| `/tasks/:id` | Update task | <img src="screenshots/updateTaskyById.png" alt="Update Task" width="300"/> |
-| `/tasks/:id` | Delete task | <img src="screenshots/deleteTaskById.png" alt="Delete Task" width="300"/> |
-| `/auth/refresh` | Refresh access token | <img src="screenshots/refresh_accessToken.png" alt="Refresh Token" width="300"/> |
-| `/auth/current` | Get current user | <img src="screenshots/access_currentUser.png" alt="Current User" width="300"/> |
+
+
 
 
 ## Error Handling
