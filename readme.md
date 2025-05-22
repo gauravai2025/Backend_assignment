@@ -1,47 +1,61 @@
 
 # Backend_assignment
 
-A RESTful Task Management API built with Node.js, Express, and MongoDB featuring user and task management with JWT-based authentication.
+A RESTful Task Management API built with Node.js, Express, and MongoDB featuring user and task management with JWT-based authentication. Now supports Docker containerization for easier deployment.
+
+---
 
 ## Table of Contents
 
-- [Project Overview](#project-overview)  
-- [Setup Instructions](#setup-instructions)  
-- [Environment Variables](#environment-variables)  
-- [API Documentation](#api-documentation)  
-  - [User API Endpoints](#user-api-endpoints)  
-  - [Task API Endpoints](#task-api-endpoints)  
-- [Error Handling](#error-handling)  
-- [Version Control](#version-control)  
-- [Bonus Features](#bonus-features)
+* [Project Overview](#project-overview)
+* [Setup Instructions](#setup-instructions)
 
+  * [Local Setup](#local-setup)
+  * [Docker Setup](#docker-setup)
+* [Environment Variables](#environment-variables)
+* [API Documentation](#api-documentation)
+
+  * [User API Endpoints](#user-api-endpoints)
+  * [Task API Endpoints](#task-api-endpoints)
+* [Error Handling](#error-handling)
+* [Version Control](#version-control)
+* [Bonus Features](#bonus-features)
+
+---
 
 ## Project Overview
 
-It is a simple yet robust backend API that allows you to manage users and tasks similar to basic features of Trello or Todoist. It supports JWT authentication for secure access.
+It is a simple yet robust backend API that allows you to manage users and tasks similar to basic features of Trello or Todoist. It supports JWT authentication for secure access. Now with Docker support for seamless containerized deployment.
+
+---
 
 ## Setup Instructions
 
-### Key Dependencies
+### 🛠️ Local Setup
+
+<details>
+<summary>Click to expand</summary>
+
+#### Key Dependencies
 
 This project uses the following main Node.js packages:
 
-- **express** – Web framework
-- **mongoose** – MongoDB ODM
-- **jsonwebtoken** – JWT-based authentication
-- **bcrypt** – Password hashing
-- **dotenv** – Environment variable management
-- **cookie-parser** – Cookie support
-- **cors** – Enable cross-origin requests
-- **nodemon** (dev) – Auto-restart server during development
+* **express** – Web framework
+* **mongoose** – MongoDB ODM
+* **jsonwebtoken** – JWT-based authentication
+* **bcrypt** – Password hashing
+* **dotenv** – Environment variable management
+* **cookie-parser** – Cookie support
+* **cors** – Enable cross-origin requests
+* **nodemon** (dev) – Auto-restart server during development
 
-To install all dependencies, simply run:
+To install all dependencies:
+
+```bash
+npm install
 ```
-npm install package-name
-```
 
-
-### Installation
+#### Local Installation
 
 1. **Clone the repository**
 
@@ -50,29 +64,17 @@ git clone https://github.com/gauravai2025/Backend_assignment.git
 cd Backend_assignment
 ```
 
-2. **Install dependencies**
-
-```bash
-npm install
-```
-
-3. **Create `.env` file**
-
-In the project root, create a `.env` file with:
+2. **Create `.env` file**
 
 ```env
 PORT=8000
-
-# Replace <username>, <password>, <cluster-url>, and <database> as needed
 MONGODB_URI=mongodb+srv://<username>:<password>@<cluster-url>/<database>?retryWrites=true&w=majority
-
 JWT_SECRET=your_jwt_secret_key
 ACCESS_TOKEN_EXPIRY=15m
 REFRESH_TOKEN_EXPIRY=7d
-
 ```
 
-4. **Run the server**
+3. **Run the server**
 
 ```bash
 npm start
@@ -80,21 +82,92 @@ npm start
 
 Server will run at `http://localhost:8000`
 
+</details>
+
+---
+
+### 🐳 Docker Setup
+
+This project supports Docker-based deployment for better consistency across environments.
+
+#### 1. Create a `.env` file
+
+Same as in local setup, but use the Docker-compatible Mongo URI:
+
+```env
+PORT=8000
+MONGODB_URI=mongodb://mongo:27017/tasksdb
+JWT_SECRET=your_jwt_secret_key
+ACCESS_TOKEN_EXPIRY=15m
+REFRESH_TOKEN_EXPIRY=7d
+```
+
+#### 2. Build and Run with Docker Compose
+
+```bash
+docker-compose up --build
+```
+
+This will:
+
+* Build the backend service container
+* Spin up a MongoDB container
+* Expose the app on `http://localhost:8000`
+
+#### 3. Docker File Overview
+
+##### Dockerfile
+
+```dockerfile
+FROM node:18
+
+WORKDIR /app
+
+COPY package*.json ./
+RUN npm install
+
+COPY . .
+
+EXPOSE 8000
+
+CMD ["npm", "start"]
+```
+
+##### docker-compose.yml
+
+```yaml
+version: '3'
+services:
+  app:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - MONGODB_URI=mongodb://mongo:27017/tasksdb
+      - JWT_SECRET=your_jwt_secret_key
+      - ACCESS_TOKEN_EXPIRY=15m
+      - REFRESH_TOKEN_EXPIRY=7d
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"
+```
+
 ---
 
 ## Environment Variables
 
-| Variable               | Description                      | Example                              |
-|------------------------|----------------------------------|--------------------------------------|
-| `PORT`                 | Port number to run the server    | 8000                                 |
-| `MONGODB_URI`          | MongoDB connection string        | mongodb://user:pass@host:port/db     |
-| `JWT_SECRET`           | Secret key for JWT token signing | your_secret_key_here                 |
-| `ACCESS_TOKEN_EXPIRY`  | Access token expiration time     | 15m                                  |
-| `REFRESH_TOKEN_EXPIRY` | Refresh token expiration time    | 7d                                   |
+| Variable               | Description                      | Example                       |
+| ---------------------- | -------------------------------- | ----------------------------- |
+| `PORT`                 | Port number to run the server    | 8000                          |
+| `MONGODB_URI`          | MongoDB connection string        | mongodb://mongo:27017/tasksdb |
+| `JWT_SECRET`           | Secret key for JWT token signing | your\_secret\_key\_here       |
+| `ACCESS_TOKEN_EXPIRY`  | Access token expiration time     | 15m                           |
+| `REFRESH_TOKEN_EXPIRY` | Refresh token expiration time    | 7d                            |
 
----
-
-## API Documentation
 
 ### User API Endpoints
 
@@ -138,19 +211,6 @@ Server will run at `http://localhost:8000`
 | DELETE | `/api/tasks/:id`      | Delete task              | <img src="screenshots/deleteTaskById.png" alt="Delete Task" width="300"/> |
 
 
-
-
-
-## Error Handling
-
-Common error responses:
-
-```json
-{
-  "status": "error",
-  "message": "Descriptive error message",
-  "code": 400
-}
 ```
 
 | Code | Scenario                                                                 |
@@ -163,37 +223,31 @@ Common error responses:
 
 ---
 
+
 ## Version Control
 
-<<<<<<< HEAD
+*(resolved conflict and kept structure)*
+
 ```bash
 # Commit example
 git commit -m "feat: add JWT authentication middleware"
 git commit -m "fix: correct task status validation"
 ```
 
-* Branching strategy:
-  - `main` for production
-  - `develop` for staging
-  - Feature branches: `feature/auth`, `feature/tasks`, etc.
+* `main` for production
+* `develop` for staging
+* Feature branches: `feature/auth`, `feature/tasks`, etc.
 
 Repository: [Backend Assignment](https://github.com/gauravai2025/Backend_assignment)
-=======
-* The project uses Git for version control.
-* Commits follow meaningful, clear messages.
-* Branching strategy includes `main` for production, and feature branches for new features or bug fixes.
-
->>>>>>> 1e349e79a1b5a284ed158c36290127bad48d79b5
 
 ---
 
 ## Bonus Features
 
-✅ JWT Authentication with access/refresh tokens  
-✅ Comprehensive error handling  
-✅ API documentation with examples  
-✅ Pagination and filtering  
-✅ Environment configuration  
-✅ Automated testing (Postman/thunder client)  
-
-
+✅ JWT Authentication with access/refresh tokens
+✅ Comprehensive error handling
+✅ API documentation with examples
+✅ Pagination and filtering
+✅ Environment configuration
+✅ Docker containerization support 🐳
+✅ Automated testing (Postman/thunder client)
