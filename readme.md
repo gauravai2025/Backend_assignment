@@ -1,14 +1,4 @@
 
-```markdown
-# Backend-assignment
-
-A RESTful Task Management API built with Node.js, Express, and MongoDB featuring user and task management with JWT-based authentication.
-
-
----
-
-=======
-````markdown
 # Backend_assignment
 
 A RESTful Task Management API built with Node.js, Express, and MongoDB featuring user and task management with JWT-based authentication.
@@ -139,19 +129,20 @@ Content-Type: application/json
 ---
 ## API Test Endpoints (Screenshots)
 
-| Endpoint | Functionality | Screenshot |
-|----------|--------------|------------|
-| `/users/register` | User registration | ![User Registration](screenshots/user_register.png) |
-| `/users/login` | User login (JWT generation) | ![User Login](user_login.png) |
-| `/users/:id` | Get user details | ![User Details](user_details.png) |
-| `/users` | Get all users | ![All Users](getAllUsers.png) |
-| `/tasks` | Create new task | ![Add Task](addTask.png) |
-| `/tasks/:id` | Get task by ID | ![Get Task](getTaskById.png) |
-| `/tasks` | Get all tasks | ![All Tasks](getAllTasks.png) |
-| `/tasks/:id` | Update task | ![Update Task](updateTaskById.png) |
-| `/tasks/:id` | Delete task | ![Delete Task](deleteTaskById.png) |
-| `/auth/refresh` | Refresh access token | ![Refresh Token](refresh_accessToken.png) |
-| `/auth/current` | Get current user | ![Current User](access_currentUserp.png) |
+| Endpoint | Description | Screenshot |
+|----------|-------------|------------|
+| `/users/register` | User registration | <img src="screenshots/user_register.png" alt="User Registration" width="300"/> |
+| `/users/login` | User login (JWT generation) | <img src="screenshots/user_login.png" alt="User Login" width="300"/> |
+| `/users/:id` | Get user details | <img src="screenshots/user_details.png" alt="User Details" width="300"/> |
+| `/users` | Get all users | <img src="screenshots/getAllUsers.png" alt="All Users" width="300"/> |
+| `/tasks` | Create new task | <img src="screenshots/addTask.png" alt="Add Task" width="300"/> |
+| `/tasks/:id` | Get task by ID | <img src="screenshots/getTaskById.png" alt="Get Task" width="300"/> |
+| `/tasks` | Get all tasks | <img src="screenshots/getAllTasks.png" alt="All Tasks" width="300"/> |
+| `/tasks/:id` | Update task | <img src="screenshots/updateTaskyById.png" alt="Update Task" width="300"/> |
+| `/tasks/:id` | Delete task | <img src="screenshots/deleteTaskById.png" alt="Delete Task" width="300"/> |
+| `/auth/refresh` | Refresh access token | <img src="screenshots/refresh_accessToken.png" alt="Refresh Token" width="300"/> |
+| `/auth/current` | Get current user | <img src="screenshots/access_currentUser.png" alt="Current User" width="300"/> |
+
 
 ## Error Handling
 
