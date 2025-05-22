@@ -7,8 +7,21 @@ A RESTful Task Management API built with Node.js, Express, and MongoDB featuring
 
 ## Table of Contents
 
+<<<<<<< HEAD
 * [Project Overview](#project-overview)
 * [Setup Instructions](#setup-instructions)
+=======
+- [Project Overview](#project-overview)  
+- [Setup Instructions](#setup-instructions)  
+- [Environment Variables](#environment-variables)  
+- [API Documentation](#api-documentation)  
+  - [User API Endpoints](#user-api-endpoints)  
+  - [Task API Endpoints](#task-api-endpoints)
+  - [API Response Format](#api-response-format)
+  - [Standard Https Status Code used](#standard-https-status-code-used)
+- [Git Version Control](#git-version-control)  
+- [Bonus Features Implemented](#bonus-features-implemented)
+>>>>>>> ec54651f5d67496dbe2fb713e38760e758612d72
 
   * [Local Setup](#local-setup)
   * [Docker Setup](#docker-setup)
@@ -198,35 +211,81 @@ services:
 ## API Test Endpoints (Screenshots)
 | Method | Endpoint              | Description              | Screenshot |
 |--------|-----------------------|--------------------------|------------|
-| POST   | `/api/users/register` | User registration        | <img src="screenshots/user_register.png" alt="User Registration" width="300"/> |
-| POST   | `/api/users/login`    | User login (JWT)         | <img src="screenshots/user_login.png" alt="User Login" width="300"/> |
-| GET    | `/api/users/me`       | Get current user profile | <img src="screenshots/access_currentUser.png" alt="Current User" width="300"/> |
-| GET    | `/api/users/users/:id`| Get user details         | <img src="screenshots/user_details.png" alt="User Details" width="300"/> |
-| POST   | `/api/users/refresh`  | Refresh access token     | <img src="screenshots/refresh_accessToken.png" alt="Refresh Token" width="300"/> |
-| GET    | `/api/users/users`    | Get all users            | <img src="screenshots/getAllUsers.png" alt="All Users" width="300"/> |
-| POST   | `/api/tasks`          | Create new task          | <img src="screenshots/addTask.png" alt="Add Task" width="300"/> |
-| GET    | `/api/tasks/:id`      | Get task by ID           | <img src="screenshots/getTaskById.png" alt="Get Task" width="300"/> |
-| GET    | `/api/tasks`          | Get all tasks            | <img src="screenshots/getAllTasks.png" alt="All Tasks" width="300"/> |
-| PUT    | `/api/tasks/:id`      | Update task              | <img src="screenshots/updateTaskById.png" alt="Update Task" width="300"/> |
-| DELETE | `/api/tasks/:id`      | Delete task              | <img src="screenshots/deleteTaskById.png" alt="Delete Task" width="300"/> |
+| POST   | `/api/users/register` | User registration        | <img src="screenshots/user_register.png" alt="User Registration" width="900"/> |
+| POST   | `/api/users/login`    | User login (JWT)         | <img src="screenshots/user_login.png" alt="User Login" width="900"/> |
+| GET    | `/api/users/me`       | Get current user profile | <img src="screenshots/access_currentUser.png" alt="Current User" width="900"/> |
+| GET    | `/api/users/users/:id`| Get user details         | <img src="screenshots/user_details.png" alt="User Details" width="900"/> |
+| POST   | `/api/users/refresh`  | Refresh access token     | <img src="screenshots/refresh_accessToken.png" alt="Refresh Token" width="900"/> |
+| GET    | `/api/users/users`    | Get all users            | <img src="screenshots/getAllUsers.png" alt="All Users" width="900"/> |
+| POST   | `/api/tasks`          | Create new task          | <img src="screenshots/addTask.png" alt="Add Task" width="900"/> |
+| GET    | `/api/tasks/:id`      | Get task by ID           | <img src="screenshots/getTaskById.png" alt="Get Task" width="900"/> |
+| GET    | `/api/tasks`          | Get all tasks            | <img src="screenshots/getAllTasks.png" alt="All Tasks" width="900"/> |
+| PUT    | `/api/tasks/:id`      | Update task              | <img src="screenshots/updateTaskById.png" alt="Update Task" width="900"/> |
+| DELETE | `/api/tasks/:id`      | Delete task              | <img src="screenshots/deleteTaskById.png" alt="Delete Task" width="900"/> |
 
+## API Response Format
+
+<<<<<<< HEAD
+=======
+#### All API responses (success or error) follow a standard structure for consistency
+
+### Success Response Format
+
+>>>>>>> ec54651f5d67496dbe2fb713e38760e758612d72
+```
+ constructor(statusCode, data, message = "Success") {
+        this.statusCode = statusCode;
+        this.data = data;
+        this.message = message;
+        this.success = statusCode < 400;
+    }
+```
+### Error Response Format
 
 ```
+constructor(
+        statusCode,
+         message = "Something went wrong",
+          errors = [], 
+          stack = ""
+        ) {
+        super(message);
+        this.statusCode = statusCode;
+        this.data = null;
+        this.message = message;
+        this.success = false;
+        this.errors = errors;
 
+        if (stack) {
+            this.stack = stack;
+        }
+         else {
+            Error.captureStackTrace(this, this.constructor);
+        }
+    }
+
+```
+## Standard Https Status Code used
 | Code | Scenario                                                                 |
 |------|--------------------------------------------------------------------------|
-| 400  | Invalid request body/missing required fields                            |
-| 401  | Unauthorized (missing/invalid JWT)                                      |
-| 403  | Forbidden (user doesn't have permission)                                |
-| 404  | Resource not found                                                     |
-| 500  | Server error (with generic message to client)                           |
+| 200  | OK – The request was successful and the server returned the expected response |
+| 201  | Created – The request was successful and a new resource was created      |
+| 400  | Bad Request – Invalid request body or missing required fields            |
+| 401  | Unauthorized – Missing or invalid JWT token                              |
+| 403  | Forbidden – User does not have permission to access the resource         |
+| 404  | Not Found – The requested resource was not found                         |
+| 500  | Internal Server Error – A generic server-side error occurred             |
 
----
 
+<<<<<<< HEAD
 
 ## Version Control
 
 *(resolved conflict and kept structure)*
+=======
+
+## Git Version Control
+>>>>>>> ec54651f5d67496dbe2fb713e38760e758612d72
 
 ```bash
 # Commit example
@@ -234,15 +293,22 @@ git commit -m "feat: add JWT authentication middleware"
 git commit -m "fix: correct task status validation"
 ```
 
+<<<<<<< HEAD
 * `main` for production
 * `develop` for staging
 * Feature branches: `feature/auth`, `feature/tasks`, etc.
 
 Repository: [Backend Assignment](https://github.com/gauravai2025/Backend_assignment)
+=======
+Repository: [Backend Assignment](https://github.com/gauravai2025/Backend_assignment)
+=======
+* The project uses Git for version control.
+* Commits follow meaningful, clear messages.
+>>>>>>> ec54651f5d67496dbe2fb713e38760e758612d72
 
 ---
 
-## Bonus Features
+## Bonus Features Implemented
 
 ✅ JWT Authentication with access/refresh tokens
 ✅ Comprehensive error handling
