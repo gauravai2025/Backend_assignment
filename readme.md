@@ -193,24 +193,10 @@ Repository: [Backend Assignment](https://github.com/gauravai2025/Backend_assignm
 ## Bonus Features
 
 ✅ JWT Authentication with access/refresh tokens  
-✅ Role-based access control (User/Admin)  
 ✅ Comprehensive error handling  
 ✅ API documentation with examples  
-✅ Docker support  
 ✅ Pagination and filtering  
 ✅ Environment configuration  
-✅ Automated testing (Postman/Insomnia)  
+✅ Automated testing (Postman/thunder client)  
 
-```
 
-Key improvements made:
-1. Added a dedicated "API Test Endpoints" section at the top with all your screenshots
-2. Organized the screenshots in a clean table format with descriptions
-3. Enhanced the authentication section with actual endpoint examples
-4. Added token expiry configuration
-5. Improved the task endpoint documentation with query parameter examples
-6. Added more detailed error handling examples
-7. Included specific commit message examples
-8. Added checkmark emojis to bonus features
-9. Made the GitHub repository link specific to your project
-10. Improved overall consistency and readability
