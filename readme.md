@@ -1,8 +1,6 @@
-Here's an improved version of your README.md with the API test endpoints and their functions displayed prominently at the top, along with other enhancements:
 
-<<<<<<< HEAD
 ```markdown
-# Taskify
+# Backend-assignment
 
 A RESTful Task Management API built with Node.js, Express, and MongoDB featuring user and task management with JWT-based authentication.
 
